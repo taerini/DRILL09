@@ -51,7 +51,11 @@ while running:
     elif dir_x < 0:
         face = -1
 
-    character.clip_draw(frame * 100, 300, 100, 100, x, y)
+    if dir_x == 0 and dir_y == 0:
+        action = 3 if face == 1 else 2  # IDLE
+    else:
+        action = 1 if face == 1 else 0  # RUN
+    character.clip_draw(frame * 100, action * 100, 100, 100, x, y)
     update_canvas()
     handle_events()
     frame = (frame + 1) % 8
