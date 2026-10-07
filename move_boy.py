@@ -1,6 +1,6 @@
 from pico2d import *
 
-TUK_WIDTH, TUK_HEIGHT = 1280, 800
+TUK_WIDTH, TUK_HEIGHT = 900, 720  # 배경(1280x1024)과 같은 5:4 비율
 HALF_W, HALF_H = 25, 45  # 스프라이트 안의 소년 크기 절반 (경계 판정용)
 
 open_canvas(TUK_WIDTH, TUK_HEIGHT)
@@ -47,7 +47,7 @@ face = 1  # 1: 오른쪽, -1: 왼쪽 (위/아래 이동 시에는 기존 방향 
 
 while running:
     clear_canvas()
-    tuk_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
+    tuk_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2, TUK_WIDTH, TUK_HEIGHT)
     if dir_x > 0:
         face = 1
     elif dir_x < 0:
