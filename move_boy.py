@@ -1,6 +1,7 @@
 from pico2d import *
 
 TUK_WIDTH, TUK_HEIGHT = 1280, 1024
+HALF_W, HALF_H = 25, 45  # 스프라이트 안의 소년 크기 절반 (경계 판정용)
 
 open_canvas(TUK_WIDTH, TUK_HEIGHT)
 tuk_ground = load_image('TUK_GROUND.png')
@@ -59,8 +60,8 @@ while running:
     update_canvas()
     handle_events()
     frame = (frame + 1) % 8
-    x += dir_x * SPEED
-    y += dir_y * SPEED
+    x = clamp(HALF_W, x + dir_x * SPEED, TUK_WIDTH - HALF_W)
+    y = clamp(HALF_H, y + dir_y * SPEED, TUK_HEIGHT - HALF_H)
     delay(0.05)
 
 close_canvas()
