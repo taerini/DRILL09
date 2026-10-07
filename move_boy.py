@@ -32,6 +32,7 @@ running = True
 x, y = TUK_WIDTH // 2, TUK_HEIGHT // 2
 frame = 0
 dir_x = 0
+SPEED = 5
 
 while running:
     clear_canvas()
@@ -40,6 +41,7 @@ while running:
     update_canvas()
     handle_events()
     frame = (frame + 1) % 8
+    x += dir_x * SPEED
     delay(0.05)
 
 close_canvas()
