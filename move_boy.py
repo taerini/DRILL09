@@ -42,6 +42,7 @@ x, y = TUK_WIDTH // 2, TUK_HEIGHT // 2
 frame = 0
 dir_x, dir_y = 0, 0
 SPEED = 5
+IDLE_FRAME_SPEED = 0.6  # IDLE일 때는 프레임을 천천히 넘김 (RUN은 1)
 face = 1  # 1: 오른쪽, -1: 왼쪽 (위/아래 이동 시에는 기존 방향 유지)
 
 while running:
@@ -52,14 +53,15 @@ while running:
     elif dir_x < 0:
         face = -1
 
-    if dir_x == 0 and dir_y == 0:
+    idle = dir_x == 0 and dir_y == 0
+    if idle:
         action = 3 if face == 1 else 2  # IDLE
     else:
         action = 1 if face == 1 else 0  # RUN
-    character.clip_draw(frame * 100, action * 100, 100, 100, x, y)
+    character.clip_draw(int(frame) * 100, action * 100, 100, 100, x, y)
     update_canvas()
     handle_events()
-    frame = (frame + 1) % 8
+    frame = (frame + (IDLE_FRAME_SPEED if idle else 1)) % 8
     x = clamp(HALF_W, x + dir_x * SPEED, TUK_WIDTH - HALF_W)
     y = clamp(HALF_H, y + dir_y * SPEED, TUK_HEIGHT - HALF_H)
     delay(0.05)
