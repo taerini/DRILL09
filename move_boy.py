@@ -41,10 +41,16 @@ x, y = TUK_WIDTH // 2, TUK_HEIGHT // 2
 frame = 0
 dir_x, dir_y = 0, 0
 SPEED = 5
+face = 1  # 1: 오른쪽, -1: 왼쪽 (위/아래 이동 시에는 기존 방향 유지)
 
 while running:
     clear_canvas()
     tuk_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
+    if dir_x > 0:
+        face = 1
+    elif dir_x < 0:
+        face = -1
+
     character.clip_draw(frame * 100, 300, 100, 100, x, y)
     update_canvas()
     handle_events()
